@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maniul | Portfolio</title>
+  <!-- Website Favicon -->
+  <link rel="icon" type="image/png" href="./images/p1.jpg">
+  <link rel="apple-touch-icon" href="./images/p1.jpg">
+  <link rel="shortcut icon" href="./images/p1.jpg">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&family=Roboto+Mono:wght@400&family=Rubik:wght@300;400&family=Open+Sans:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Case Study Navigation */
+    .cs-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .cs-arrow {
+      font-size: 26px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #ff006e;
+      transition: 0.2s ease;
+      user-select: none;
+      line-height: 1;
+      /* keeps arrow nicely centered */
+    }
+
+
+    .cs-arrow:hover {
+      transform: translateY(-2px);
+      color: #d8005e;
+    }
+
+    .cs-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cs-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #d4d4d4;
+      transition: 0.25s ease;
+    }
+
+    .cs-dot.active {
+      background: #ff006e;
+    }
+
+
+    .case-modal-section-title {
+      font-weight: 700;
+      /* makes it bold */
+    }
+
+
+    /* Floating WhatsApp button */
+    /* Floating WhatsApp button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      /* moved to the RIGHT side */
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .whatsapp-float i {
+      font-size: 26px;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+      background: #1ebe5b;
+    }
+
+    /* Smaller on mobile */
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 16px;
+        right: 16px;
+        /* mobile right position */
+      }
+
+      .whatsapp-float i {
+        font-size: 22px;
+      }
+    }
+
+
+
+    :root {
+      --bg-page: #e9c112;
+      /* yellow background */
+      --bg-surface: #FFFFFF;
+      /* white cards */
+      --border-subtle: #E2E2E2;
+      --text-main: #000000;
+      /* black text */
+      --text-muted: #222222;
+      --accent-primary: #FF006E;
+      /* aqua cyan */
+      --accent-primary-dark: #D8005E;
+    }
+
+    /* BASE */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+
+    html {
+      scroll-padding-top: 90px;
+    }
+
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-main);
+      margin-top: 0;
+      letter-spacing: -0.3px;
+      font-weight: 700;
+    }
+
+    h4,
+    h5 {
+      font-family: 'Rubik', sans-serif;
+      color: var(--text-main);
+    }
+
+    p {
+      margin-top: 0;
+      color: var(--text-main);
+    }
+
+    .mono,
+    code,
+    pre {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    /* force old grey inline text to black */
+    [style*="#8b949e"],
+    [style*="#c9d1d9"],
+    [style*="#8B949E"],
+    [style*="#C9D1D9"] {
+      color: var(--text-main) !important;
+    }
+
+    /* LAYOUT */
+    section {
+      max-width: 1150px;
+      margin: 100px auto 60px auto;
+      /* Increased vertical spacing */
+    }
+
+    /* Fix spacing in the Home (Hero) section */
+    #home .intro-text h2 {
+      margin-bottom: 14px;
+      /* consistent space below headline */
+    }
+
+    #home .intro-text p {
+      margin-top: 0;
+      margin-bottom: 22px;
+      /* consistent distance before button */
+    }
+
+    #home .intro-text .btn-group {
+      margin-top: 0;
+      /* removes unwanted extra margin */
+    }
+
+
+    .box {
+      background: var(--bg-surface);
+      padding: 28px;
+      margin-bottom: 40px;
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    /* HEADER — slimmer version */
+    header {
+      background: rgba(20, 20, 20, 0.78);
+      padding: 10px 28px;
+      /* reduced height */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      /* reduced shadow so it matches new height */
+    }
+
+    header h1 {
+      font-size: 1.32rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #FFFFFF;
+    }
+
+    /* NAVIGATION */
+    nav a {
+      color: #FFFFFF;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      position: relative;
+      transition: 0.25s ease;
+    }
+
+
+    /* Hover color change */
+    nav a:hover {
+      color: #FF006E;
+      /* your accent color */
+    }
+
+    /* Underline animation */
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 0%;
+      height: 2px;
+      background: #FF006E;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    /* Mobile Menu Icon */
+    #menu-icon {
+      color: #FFFFFF;
+    }
+
+
+
+
+
+    /* mobile menu */
+    #menu-toggle {
+      display: none;
+    }
+
+    /* HERO */
+    .flex {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    img.profile {
+      border-radius: 50%;
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .intro-text h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+    }
+
+    .intro-text p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+    }
+
+    .highlight {
+      color: var(--accent-primary-dark);
+      font-weight: 600;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 22px;
+      display: inline-block;
+      padding-bottom: 6px;
+      border-bottom: 4px solid var(--accent-primary);
+    }
+
+    /* ABOUT */
+    /* ABOUT */
+    .about-container {
+      display: block;
+    }
+
+    .about-text {
+      flex: 1 1 100%;
+      font-size: 1.05rem;
+      line-height: 1.95;
+      position: relative;
+    }
+
+    /* Video floats right so text wraps like a newspaper column */
+    .about-text .about-video {
+      float: right;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 0 20px 24px;
+      /* space between text and video on the left */
+    }
+
+    /* Clear the float at the end of the text block */
+    .about-text::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    /* Keep the nice styling for the video itself */
+    .about-text .about-video video {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: all 1s ease;
+    }
+
+
+    .about-images {
+      flex: 1 1 40%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .about-images img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-images img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.35);
+    }
+
+    /* EXPERIENCE */
+    .experience-box {
+      margin-bottom: 28px;
+    }
+
+    .experience-logo {
+      max-height: 45px;
+      margin-bottom: 12px;
+    }
+
+    /* EDUCATION */
+    .education-box img {
+      max-height: 55px;
+      display: block;
+      margin: auto;
+    }
+
+    /* LOGO SLIDER */
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #F5F5F5;
+      margin-top: 18px;
+      padding: 10px 0;
+    }
+
+    .slide-track {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      /* no CSS animation here, JS will move it */
+    }
+
+    .slide {
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      filter: grayscale(10%);
+      opacity: 0.9;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    }
+
+    .slide:hover {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    /* Skill Section Layout */
+    #skills {
+      max-width: 1150px;
+      margin: 80px auto;
+    }
+
+    .skills-layout {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: nowrap;
+      /* always side by side */
+    }
+
+    /* Skill Cards */
+    .skill-card {
+      flex: 1;
+      max-width: 48%;
+      /* ensures side by side */
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Skill Badges */
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .skill-badge {
+      padding: 7px 14px;
+      background: #fff4fb;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Responsive rules */
+    @media (max-width: 900px) {
+      .skills-layout {
+        flex-wrap: wrap;
+        /* but only when truly needed */
+      }
+
+      .skill-card {
+        max-width: 100%;
+      }
+    }
+
+
+
+
+    footer {
+      background: #020617;
+      /* very dark blue black */
+      color: #e5e7eb;
+      padding: 40px 22px 28px 22px;
+      border-top: 3px solid var(--accent-primary);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    .footer-column {
+      flex: 1 1 260px;
+      min-width: 240px;
+    }
+
+    .footer-title {
+      color: #f9fafb;
+      margin: 0 0 6px 0;
+    }
+
+    .footer-subtitle {
+      margin: 0 0 10px 0;
+      color: #cbd5f5;
+      font-weight: 500;
+    }
+
+    .footer-heading {
+      color: #f9fafb;
+      margin: 0 0 8px 0;
+    }
+
+    .footer-text {
+      margin: 4px 0 10px 0;
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
+
+    .footer-text.small-copy {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* Links */
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    /* CTA button */
+    .footer-cta {
+      margin-top: 14px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7a08c5, #e83e8c);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+      font-size: 0.95rem;
+    }
+
+    .footer-cta:hover {
+      background: linear-gradient(135deg, #5c02a1, #c60c73);
+      color: #FFE98A !important;
+    }
+
+    /* Lists */
+    .footer-list {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0 0;
+    }
+
+    .footer-list li {
+      margin-bottom: 6px;
+    }
+
+    .footer-label {
+      display: inline-block;
+      min-width: 60px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    /* Social icons */
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .social-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+    }
+
+    .social-icon i {
+      font-size: 15px;
+      color: #e5e7eb;
+    }
+
+    .social-icon:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      border-color: var(--accent-primary);
+    }
+
+    /* Map */
+    footer iframe {
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      footer {
+        padding: 32px 18px 24px 18px;
+      }
+    }
+
+
+    /* RESPONSIVE */
+
+    /* tablet */
+    @media (max-width: 1024px) {
+      .profile {
+        width: 210px;
+        height: 210px;
+      }
+
+      .flex {
+        gap: 26px;
+      }
+
+      .intro-text h2 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.9rem;
+      }
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+
+      header {
+        padding: 12px 20px;
+      }
+
+      .flex {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile {
+        width: 180px;
+        height: 180px;
+      }
+
+      .intro-text h2 {
+        font-size: 1.7rem;
+      }
+
+      .intro-text p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+        text-align: center;
+      }
+
+      #navbar {
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        background: var(--bg-surface);
+        width: 100%;
+        display: none;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      #navbar a {
+        margin: 12px 0;
+        text-align: center;
+      }
+
+      #menu-icon {
+        display: block;
+      }
+
+      .about-container {
+        flex-direction: column;
+      }
+
+      .about-images {
+        grid-template-columns: 1fr;
+      }
+
+      .slide {
+        width: 300px;
+        height: 200px;
+      }
+
+      footer>div {
+        min-width: 100%;
+      }
+    }
+
+    /* small mobile */
+    @media (max-width: 480px) {
+      .profile {
+        width: 150px;
+        height: 150px;
+      }
+
+      .intro-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+
+      .slide {
+        width: 250px;
+        height: 180px;
+      }
+
+      #skills>div {
+        width: 140px;
+        padding: 14px;
+      }
+    }
+
+    .growth-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #7a08c5, #e83e8c);
+      color: #FFFFFF;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 16px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .growth-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #5c02a1, #c60c73);
+    }
+
+    .wave-hand {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      animation: wave-hand 1.8s ease-in-out infinite;
+    }
+
+    @keyframes wave-hand {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      15% {
+        transform: rotate(18deg);
+      }
+
+      30% {
+        transform: rotate(-10deg);
+      }
+
+      45% {
+        transform: rotate(14deg);
+      }
+
+      60% {
+        transform: rotate(-4deg);
+      }
+
+      75% {
+        transform: rotate(8deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    /* Certificates Slider */
+    .cert-slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    .cert-slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .cert-slider img {
+      min-width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Slider Buttons */
+    .cert-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #000000aa;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.25s ease;
+    }
+
+    .cert-btn:hover {
+      background: #FF006E;
+    }
+
+    .cert-btn.left {
+      left: 10px;
+    }
+
+    .cert-btn.right {
+      right: 10px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .cert-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+      }
+    }
+
+    /* Case Studies Section */
+    #case-studies {
+      max-width: 1150px;
+      margin: 100px auto 60px auto;
+    }
+
+    .case-studies-inner {
+      position: relative;
+    }
+
+    /* Carousel structure */
+    .case-carousel {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    /* Each page that holds up to 4 cards */
+    .case-page {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* If a case-page has only ONE card, make that card span full width */
+
+
+
+    /* Case study card */
+    .case-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 18px 20px;
+
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+
+
+    .case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .case-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .case-card-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    /* Small tag row */
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .case-tag {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #fff7fd;
+    }
+
+    .case-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #000000aa;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.25s ease;
+      z-index: 10;
+
+      /* PUSH BUTTONS OUTSIDE SO THEY DON'T OVERLAP */
+      margin-top: -20px;
+    }
+
+    .case-nav-btn.left {
+      left: -55px;
+      /* moved outside */
+    }
+
+    .case-nav-btn.right {
+      right: -55px;
+      /* moved outside */
+    }
+
+
+
+    /* Page dots */
+    .case-dots {
+      display: flex;
+      align-items: center;
+      /* vertically center with arrows */
+      justify-content: center;
+      margin-top: 0;
+      /* remove extra vertical offset */
+      gap: 8px;
+    }
+
+
+    .case-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #d4d4d4;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .case-dot.active {
+      background: #FF006E;
+      transform: scale(1.1);
+    }
+
+    /* Modal overlay */
+    .case-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    /* Modal box */
+    .case-modal {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 950px;
+      width: 95%;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-modal-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .case-modal-title {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .case-modal-close {
+      border: none;
+      background: transparent;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* Modal body layout */
+    .case-modal-body {
+      padding: 18px 22px 20px 22px;
+      display: block;
+      overflow-y: auto;
+    }
+
+    /* Text paragraphs */
+    .case-modal-text p {
+      margin-bottom: 8px;
+    }
+
+    .case-modal-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .case-modal-skill {
+      font-size: 0.85rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #fff4fb;
+    }
+
+
+    /* Deliverables list if you ever use it again */
+    .case-modal-deliverables {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    .case-modal-deliverables li {
+      margin-bottom: 4px;
+    }
+
+    /* Screenshot container now full width under everything */
+    .case-modal-gallery {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .case-modal-main-img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      /* indicates clickable to open in new tab */
+    }
+
+
+    /* Responsive for modal and grid */
+    @media (max-width: 900px) {
+      .case-page {
+        grid-template-columns: 1fr;
+      }
+
+      .case-modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .case-nav-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+      }
+    }
+  </style>
+
+
+
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Maniul Islam</h1>
+    <!-- Menu Toggle -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" id="menu-icon">&#9776;</label>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#certificates">Certifications</a>
+      <a href="./files/Maniul-Islam-Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+
+
+  </header>
+  <script>
+    (function () {
+      function responsiveHeader() {
+        const navbar = document.getElementById('navbar');
+        const icon = document.getElementById('menu-icon');
+        if (window.innerWidth <= 768) {
+          navbar.style.flexDirection = 'column';
+          navbar.style.position = 'absolute';
+          navbar.style.top = '60px';
+          navbar.style.left = '0';
+          navbar.style.background = '#0A192F';
+          navbar.style.width = '100%';
+          navbar.style.display = 'none';
+          Array.from(navbar.children).forEach(a => {
+            a.style.margin = '10px 0';
+            a.style.textAlign = 'center';
+          });
+          icon.style.display = 'block';
+        } else {
+          navbar.style.display = 'flex';
+          navbar.style.flexDirection = 'row';
+          icon.style.display = 'none';
+        }
+      }
+      responsiveHeader();
+      window.addEventListener('resize', responsiveHeader);
+
+      document.getElementById('menu-toggle').addEventListener('change', function () {
+        const navbar = document.getElementById('navbar');
+        navbar.style.display = this.checked ? 'flex' : 'none';
+      });
+    })();
+  </script>
+
+  <section id="home">
+    <div class="box flex">
+      <img src="./images/p1.jpg" alt="Profile" class="profile">
+
+      <div class="intro-text">
+
+        <!-- Friendly Greeting with animated hand -->
+        <h3 style="font-size:1.3rem; margin:0 0 6px 0;">
+          Hey <span class="wave-hand">👋</span>
+        </h3>
+
+        <!-- Subheading -->
+        <h2 style="margin-top:0;">
+          I'm Maniul Islam
+        </h2>
+
+        <!-- Main description (exact text you gave) -->
+        <p>
+          A passionate <span class="highlight">𝐠𝐚𝐦𝐞-𝐜𝐡𝐚𝐧𝐠𝐞𝐫</span> for underperforming ad campaigns.
+          I love turning marketing struggles into success stories for my clients.
+          With more than <span class="highlight">3+ years</span> of experience generating over
+          <span class="highlight">$8M</span> in revenue and thousands of qualified leads,
+          I specialize in managing creative teams, optimizing ad performance, and leading
+          full funnel marketing operations for agencies across North America.
+        </p>
+
+        <!-- Button -->
+        <div class="btn-group" style="display:flex; gap:18px; flex-wrap:wrap;">
+
+          <!-- Growth Call Button -->
+          <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ13y73YJhCAVoaufddVyEOsl6Ql_wU-1ayrOzjdAOQy6ikmrieo9_UHl7BkVt1wkMjtRs0FpIsB"
+            target="_blank" rel="noopener noreferrer" class="growth-btn">
+            🚀 Book Your Growth Call
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:info.maniul@gmail.com" class="growth-btn">
+            📩 Email
+          </a>
+
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <script>
+    // Add hover animation effect
+    document.querySelectorAll('a[download]').forEach(btn => {
+      btn.addEventListener("mouseover", () => {
+        btn.style.transform = "translateY(-3px) scale(1.05)";
+        btn.style.boxShadow = "0 10px 20px rgba(0,0,0,0.25)";
+      });
+      btn.addEventListener("mouseout", () => {
+        btn.style.transform = "translateY(0) scale(1)";
+        btn.style.boxShadow = "0 6px 15px rgba(0,0,0,0.2)";
+      });
+    });
+  </script>
+
+  <section id="about">
+    <div class="box about-container">
+      <div class="about-text">
+        <h1 class="section-title">About Me</h1>
+
+        <!-- Video is now inside the text block and floats to the right -->
+        <div class="about-video">
+          <video controls poster="./images/v1-thumb.png"
+            onmouseover="this.style.transform='scale(1.02)';this.style.boxShadow='0 12px 30px rgba(0,0,0,0.4)';"
+            onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)';"
+            onloadeddata="this.style.opacity='1';this.style.transform='scale(1)';"
+            style="opacity:1; transform:scale(1);">
+            <source src="./images/v1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <p>
+          I am a performance driven
+          marketing strategist and
+          media buyer helping businesses fix broken funnels,
+          scale profitably, and get the highest return from their ad spend.
+        </p>
+
+        <p>
+          With more than 3 years of experience in
+          <span class="highlight">Google PPC Ads</span>,
+          <span class="highlight">Meta Ads</span>, and
+          <span class="highlight">Conversion Rate Optimization</span>,
+          I have worked with agencies in the United States and Canada, managing over
+          <span class="highlight">$40,000 per month</span> in ad spend across
+          ecommerce, travel, local service businesses, real estate, fitness, healthcare,
+          home services, HVAC, consultancy businesses, and many other industries.
+        </p>
+
+        <p>
+          Over the years, I have helped clients generate more than
+          <span class="highlight">$8 MILLIONS</span> in revenue, deliver
+          <span class="highlight">8-10x ROAS</span>, and in some cases reach
+          exceptional spikes up to <span class="highlight">55x</span>.
+          I specialize in turning underperforming campaigns into strong performers through
+          structured testing, data backed creative strategy, accurate tracking setups, and
+          deep analytical reporting.
+        </p>
+
+        <p>
+          I value <span class="highlight">transparency</span>,
+          <span class="highlight">accountability</span>, and
+          <span class="highlight">long term partnerships</span>.
+          No empty promises and no autopilot ads. Whether I am optimizing Meta campaigns,
+          fixing Google Tag Manager tracking, or building full funnel advertising systems,
+          my goal is simple: to help brands grow sustainably with performance that speaks
+          for itself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="experience">
+    <div class="box">
+      <h1 class="section-title">Experience</h1>
+
+      <!-- Voolcano Digital -->
+      <div class="experience-box">
+        <img src="./images/voolcano.jpg" alt="Voolcano Digital"
+          style="width:200px; height:auto; object-fit:contain; display:block; margin:auto;">
+
+        <h3 style="color:#FF006E; text-align:center; margin-bottom:5px;">
+          <a target="_blank" rel="noopener noreferrer" style="color:#FF006E; text-decoration:none;">
+            Marketing Manager and Media Buyer (Remote)
+          </a>
+        </h3>
+        <p style="color:#000000; text-align:center; font-style:italic; margin-top:0;">
+          Sep 2025 – Present
+        </p>
+
+        <div style="color:#000000; line-height:1.6; padding: 0 15px;">
+          <p>
+            At <a href="https://voolcano.ca/" target="_blank" rel="noopener noreferrer"
+              style="color:#FF006E; text-decoration:none; font-weight:700;">
+              <strong>Voolcano Digital</strong>
+            </a>, I lead the digital marketing and creative team to deliver strong results for local
+            service businesses across the Greater Toronto Area. I plan & manage full funnel campaigns on ad platforms
+            like Meta, Google, Reddit, Linkedin etc. And oversee the production of creative content, and look for new
+            ways to improve conversion rates. My goal is to make sure every client gets the best return on their
+            investment.
+          </p>
+        </div>
+
+        <h4 style="text-align:center; margin-top:30px; margin-bottom:8px; font-weight:600;">
+          Brands I've Managed Through Voolcano Digital
+        </h4>
+
+        <div class="slider">
+          <div class="slide-track">
+            <img src="./images/zelux.png" alt="Zelux Railings" class="slide">
+            <img src="./images/entegro.png" alt="Entegro Consult" class="slide">
+            <img src="./images/redfox.png" alt="RedFox Car Detailing" class="slide">
+            <img src="./images/vital.png" alt="Vital Inspection" class="slide">
+            <img src="./images/boca.png" alt="Boca Best Cleaners" class="slide">
+            <img src="./images/ezfix.png" alt="EzFix Appliance Repair" class="slide">
+
+            <!-- Duplicate for smooth infinite scroll -->
+            <img src="./images/zelux.png" alt="Zelux Railings" class="slide">
+            <img src="./images/entegro.png" alt="Entegro Consult" class="slide">
+            <img src="./images/redfox.png" alt="RedFox Car Detailing" class="slide">
+            <img src="./images/vital.png" alt="Vital Inspection" class="slide">
+            <img src="./images/boca.png" alt="Boca Best Cleaners" class="slide">
+            <img src="./images/ezfix.png" alt="EzFix Appliance Repair" class="slide">
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider between experiences -->
+      <hr style="margin:40px 0;border:0;border-top:1px solid #E2E2E2;">
+
+      <!-- Experience 2: Conversion Consulting -->
+      <div class="experience-box">
+        <img src="./images/cclogo.png" alt="Conversion Consulting"
+          style="width:200px; height:auto; object-fit:contain; display:block; margin:auto;">
+
+        <h3 style="color:#FF006E; text-align:center; margin-bottom:5px;">
+          <a target="_blank" rel="noopener noreferrer" style="color:#FF006E; text-decoration:none;">
+            Marketing Manager and Media Buyer (Remote)
+          </a>
+        </h3>
+        <p style="color:#000000; text-align:center; font-style:italic; margin-top:0;">
+          Feb 2025 - Present
+        </p>
+
+        <div style="color:#000000; line-height:1.6; padding: 0 15px;">
+          <p>
+            At <a href="https://increasewebconversions.com/" target="_blank" rel="noopener noreferrer"
+              style="color:#FF006E; text-decoration:none; font-weight:700;">
+              <strong>Conversion Consulting</strong>
+            </a>, I manage the full digital marketing operations for this Hawaii based agency that works with tour
+            operators across the United States. I plan and manage campaigns on Google and Facebook Ads, and I provide
+            creative guidance on content to help tour businesses fill more seats and keep the bookings rolling in.
+          </p>
+        </div>
+
+        <h4 style="text-align:center; margin-top:30px; margin-bottom:8px; font-weight:600;">
+          Brands I've Managed Through Conversion Consulting
+        </h4>
+
+        <div class="slider">
+          <div class="slide-track">
+
+            <!-- Main Set -->
+            <img src="./images/cod.png" alt="Comedy On Deck Tours" class="slide">
+            <img src="./images/ply_cruises.png" alt="Plymouth Cruises" class="slide">
+            <img src="./images/bigisland.png" alt="Big Island Jeep Rental" class="slide">
+            <img src="./images/ply_watersports.png" alt="Plymouth Watersports" class="slide">
+            <img src="./images/tourcda.png" alt="Tour CDA" class="slide">
+            <img src="./images/kona_honu.png" alt="Kona Honu Divers" class="slide">
+            <img src="./images/ply_charters.png" alt="Plymouth Charters" class="slide">
+            <img src="./images/living_ocean.png" alt="Living Ocean Tours" class="slide">
+            <img src="./images/moab.png" alt="Moab Tourism Center" class="slide">
+            <img src="./images/destiny.png" alt="Destiny Water Adventures" class="slide">
+            <img src="./images/kona_snorkel.png" alt="Kona Snorkel Trips" class="slide">
+            <img src="./images/northern_epics.png" alt="Northern Epics" class="slide">
+
+            <!-- Duplicate Set for Infinite Scroll -->
+            <img src="./images/cod.png" alt="Comedy On Deck Tours" class="slide">
+            <img src="./images/ply_cruises.png" alt="Plymouth Cruises" class="slide">
+            <img src="./images/bigisland.png" alt="Big Island Jeep Rental" class="slide">
+            <img src="./images/ply_watersports.png" alt="Plymouth Watersports" class="slide">
+            <img src="./images/tourcda.png" alt="Tour CDA" class="slide">
+            <img src="./images/kona_honu.png" alt="Kona Honu Divers" class="slide">
+            <img src="./images/ply_charters.png" alt="Plymouth Charters" class="slide">
+            <img src="./images/living_ocean.png" alt="Living Ocean Tours" class="slide">
+            <img src="./images/moab.png" alt="Moab Tourism Center" class="slide">
+            <img src="./images/destiny.png" alt="Destiny Water Adventures" class="slide">
+            <img src="./images/kona_snorkel.png" alt="Kona Snorkel Trips" class="slide">
+            <img src="./images/northern_epics.png" alt="Northern Epics" class="slide">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    (function () {
+      const tracks = document.querySelectorAll('#experience .slider .slide-track');
+      if (!tracks.length) return;
+
+      const positions = new Array(tracks.length).fill(0);
+      const speed = 1; // same speed for all tracks
+
+      function step() {
+        tracks.forEach((track, index) => {
+          positions[index] -= speed;
+
+          const halfWidth = track.scrollWidth / 2;
+
+          if (Math.abs(positions[index]) >= halfWidth) {
+            positions[index] += halfWidth;
+          }
+
+          track.style.transform = `translateX(${positions[index]}px)`;
+        });
+
+        requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    })();
+  </script>
+
+  <!-- ===========================
+     CASE STUDIES SECTION
+     =========================== -->
+
+  <section id="case-studies">
+    <div class="box case-studies-inner">
+      <h1 class="section-title">Case Studies</h1>
+
+      <!-- CAROUSEL -->
+      <div class="case-carousel">
+        <div class="case-track">
+
+          <!-- PAGE 1 (up to four projects) -->
+          <div class="case-page">
+
+            <!-- PROJECT CARD #1 -->
+            <div class="case-card" onclick="openCaseModal('case-meta40x')">
+              <div class="case-card-title">
+                40x ROAS with Meta Ads: Unlocking Untapped Brand Potential💥
+              </div>
+
+              <div class="case-card-sub">
+                A real example of how Meta Ads unlocked hidden growth for a brand that was relying only on SEO and
+                Google Ads.
+              </div>
+
+              <div class="case-tags">
+                <span class="case-tag">Meta Ads</span>
+                <span class="case-tag">Social Media Marketing</span>
+                <span class="case-tag">Conversion Rate Optimization</span>
+                <span class="case-tag">Content Planning</span>
+              </div>
+            </div>
+
+            <!-- PROJECT CARD #2 -->
+            <div class="case-card" onclick="openCaseModal('case-mexlog')">
+              <div class="case-card-title">
+                ☑️50+ Qualified Leads for a High-Value Mexican Logistics Business!
+              </div>
+
+              <div class="case-card-sub">
+                Mexico based logistics company generating consistent qualified B2B leads with Google Ads and fixed
+                tracking.
+              </div>
+
+              <div class="case-tags">
+                <span class="case-tag">Google Ads</span>
+                <span class="case-tag">Conversion Rate Optimization</span>
+                <span class="case-tag">B2B Lead Gen</span>
+              </div>
+            </div>
+
+
+
+            <!-- PROJECT CARD #4 -->
+            <div class="case-card" onclick="openCaseModal('case-plymouth778')">
+              <div class="case-card-title">
+                💥778% ROAS Achieved for Plymouth Business with Just $1.4K Ad Spend
+              </div>
+
+              <div class="case-card-sub">
+                Local Plymouth business turning a $1.41K Google Ads budget into strong revenue with more than 3K
+                targeted
+                clicks and powerful returns.
+              </div>
+
+              <div class="case-tags">
+                <span class="case-tag">Google Ads</span>
+                <span class="case-tag">Analytics &amp; Tracking Setup</span>
+                <span class="case-tag">Looker Studio</span>
+                <span class="case-tag">PPC Campaign Setup &amp; Management</span>
+                <span class="case-tag">Campaign Optimization</span>
+              </div>
+            </div>
+
+            <div class="case-card" onclick="openCaseModal('case-glass52')">
+              <div class="case-card-title">
+                From Struggling Launch to 52 Conversions: A Simple Google Ads Turnaround for a Glass Company 🚀
+              </div>
+
+              <div class="case-card-sub">
+                New glass railing business in East Gwillimbury turning a challenging start into 52 conversions with
+                smart
+                Google Ads improvements and landing page optimization.
+              </div>
+
+              <div class="case-tags">
+                <span class="case-tag">Lead Generation</span>
+                <span class="case-tag">Landing Page Optimization</span>
+                <span class="case-tag">Conversion Rate Optimization</span>
+                <span class="case-tag">Microsoft Clarity</span>
+                <span class="case-tag">Data Analysis</span>
+              </div>
+            </div>
+
+
+
+
+            <!-- LATER: ADD MORE .case-card ITEMS HERE (max four in this page) -->
+
+          </div>
+
+          <!-- PAGE 2 -->
+          <div class="case-page">
+
+            <!-- PROJECT CARD #5 -->
+            <!-- PROJECT CARD #3 -->
+            <div class="case-card" onclick="openCaseModal('case-78k')">
+              <div class="case-card-title">
+                High-Converting Google Ads Campaign | $78K Revenue from $4K Budget
+              </div>
+
+              <div class="case-card-sub">
+                Las Vegas based business generating more than $78K in revenue from a little above $4K in Google Ads
+                spend in thirty days.
+              </div>
+
+              <div class="case-tags">
+                <span class="case-tag">Google Ads</span>
+                <span class="case-tag">PPC Campaign Setup &amp; Management</span>
+                <span class="case-tag">Marketing Campaign Setup &amp; Implementation</span>
+                <span class="case-tag">Google Ads Audit</span>
+                <span class="case-tag">Campaign Management</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- LATER: ADD MORE .case-page BLOCKS FOR PAGE 2, 3, ETC -->
+
+        </div>
+
+        <!-- NAV BUTTONS -->
+        <button class="case-nav-btn left" type="button" onclick="moveCasePage(-1)">‹</button>
+        <button class="case-nav-btn right" type="button" onclick="moveCasePage(1)">›</button>
+      </div>
+
+      <!-- PAGE DOTS + ARROWS (connected to carousel) -->
+      <div class="cs-nav">
+        <span class="cs-arrow" onclick="moveCasePage(-1)">‹</span>
+
+        <!-- dots will be created here by JS -->
+        <div id="case-dots" class="case-dots"></div>
+
+        <span class="cs-arrow" onclick="moveCasePage(1)">›</span>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- =====================================
+     HIDDEN TEMPLATE FOR POPUP CONTENT
+     ===================================== -->
+
+  <div id="case-meta40x" class="case-modal-content-template" style="display:none;">
+
+    <!-- Description, exactly as you gave -->
+    <div class="case-modal-text">
+      <p>
+        Until April this year, this client relied solely on SEO and Google Ads for his marketing. He was spending over
+        $150 daily on Google Ads and was happy with the results he was seeing.
+      </p>
+
+      <p>
+        But after working with him on a few projects, I saw a huge untapped opportunity, his brand had serious potential
+        on Meta Ads.
+      </p>
+
+      <p>
+        I suggested he explore Meta Ads, but he was completely unaware of how it worked. So I took full responsibility.
+      </p>
+
+      <p>
+        ✅ Set up the entire Meta Ads infrastructure - from the ad account to server-side tracking using Stape.<br><br>
+        ✅ Created a custom ad strategy tailored to his business model and the type of content he could produce
+        easily.<br><br>
+        ✅ Since it’s a one-time purchase product priced at $149 (plus optional add-ons), I went for a direct sales
+        campaign (no complex funnels, no fluff).
+      </p>
+
+      <p>
+        He provided a few videos, reels, and images. I selected the most promising ones and gave him detailed content
+        consultation so that he could create future contents with stronger hooks.
+      </p>
+
+      <p>
+        One thing I strongly believe (and proved again here):<br>
+        “It’s not about having the highest video quality. It’s about the HOOK. Even a simple video can convert if your
+        message hits right.”
+      </p>
+
+      <p>
+        🚀 The Result (After Just 1.5 Months Running):<br>
+        • $35,000+ revenue<br>
+        • 40x ROAS<br>
+        • Under $900 in ad spend
+      </p>
+
+      <p>
+        The client was shocked. He literally said he felt dumb for not exploring Meta Ads earlier.
+      </p>
+
+      <p>
+        Now, we’re scaling up! Planning better contents, testing new creatives, and refining the strategy further.
+      </p>
+
+      <p>
+        A Quick Takeaway:<br>
+        Marketing isn’t about pushing buttons on ad platforms. It’s about knowing what makes people buy. Without that,
+        no ad tool will save you.
+      </p>
+    </div>
+
+    <!-- Skills as badges, no bullet list repetition -->
+    <div>
+      <div class="case-modal-section-title">Skills &amp; Deliverables</div>
+      <div class="case-modal-skills">
+        <span class="case-modal-skill">Social Media Marketing</span>
+        <span class="case-modal-skill">Social Media Marketing Strategy</span>
+        <span class="case-modal-skill">Conversion Rate Optimization</span>
+        <span class="case-modal-skill">Facebook Pixel Setup &amp; Optimization</span>
+        <span class="case-modal-skill">Content Marketing Strategy</span>
+      </div>
+    </div>
+
+    <!-- Image at the bottom, full width -->
+    <div class="case-modal-gallery">
+      <img src="./images/case1_1.png" class="case-modal-main-img" alt="40x ROAS Meta Ads case study">
+    </div>
+
+  </div>
+
+  <div id="case-mexlog" class="case-modal-content-template" style="display:none;">
+
+    <!-- Description, exactly your text -->
+    <div class="case-modal-text">
+      <p>
+        This project was for a Mexico-based logistics company handling international shipments across Central America,
+        the USA, and Europe. I took over their Google Ads account two months ago. The custom-built site had major
+        tracking issues and wasn't marketing-friendly. I fixed tracking using GTM and GA4. Initially, the campaign
+        brought in irrelevant leads, so I tested strategies, added negative keywords, refined targeting, and improved ad
+        copy. After several optimizations, the campaign is now stable with better lead quality and consistent results.
+      </p>
+    </div>
+
+    <!-- Skills & Deliverables as badges only -->
+    <div>
+      <div class="case-modal-section-title">Skills &amp; Deliverables</div>
+      <div class="case-modal-skills">
+        <span class="case-modal-skill">Google Tag Manager</span>
+        <span class="case-modal-skill">Google Analytics 4</span>
+        <span class="case-modal-skill">Google Ads Account Setup</span>
+        <span class="case-modal-skill">Google Ads Account Management</span>
+        <span class="case-modal-skill">Conversion Rate Optimization</span>
+      </div>
+    </div>
+
+    <!-- Images at the bottom, full width, both clickable by JS -->
+    <div class="case-modal-gallery">
+      <img src="./images/case2_1.png" class="case-modal-main-img" alt="Mexican logistics Google Ads case study 1">
+      <img src="./images/case2_2.png" class="case-modal-main-img" alt="Mexican logistics Google Ads case study 2">
+    </div>
+
+  </div>
+
+  <div id="case-78k" class="case-modal-content-template" style="display:none;">
+
+    <div class="case-modal-text">
+      <p>
+        This Google Ads campaign was launched for a business based in Las Vegas. In the last 30 days, with just $4.05K
+        in ad spend, we generated 223+ conversions and over $78K in revenue, achieving a massive 1,927.77% ROAS.
+      </p>
+    </div>
+
+    <div>
+      <div class="case-modal-section-title">Skills &amp; Deliverables</div>
+      <div class="case-modal-skills">
+        <span class="case-modal-skill">Google Ads</span>
+        <span class="case-modal-skill">PPC Campaign Setup &amp; Management</span>
+        <span class="case-modal-skill">Marketing Campaign Setup &amp; Implementation</span>
+        <span class="case-modal-skill">Google Ads Audit</span>
+        <span class="case-modal-skill">Campaign Management</span>
+      </div>
+    </div>
+
+    <div class="case-modal-gallery">
+      <img src="./images/case3_1.png" class="case-modal-main-img"
+        alt="High converting Google Ads campaign result screenshot 1">
+      <img src="./images/case3_2.png" class="case-modal-main-img"
+        alt="High converting Google Ads campaign result screenshot 2">
+    </div>
+
+  </div>
+
+  <div id="case-plymouth778" class="case-modal-content-template" style="display:none;">
+
+    <div class="case-modal-text">
+      <p>
+        This campaign was built for a local business in Plymouth, Massachusetts. With just $1.41K in ad spend, we
+        generated over 3K targeted clicks and achieved a 778.77% ROAS with conversions. These results reflect my
+        ability to turn modest budgets into high performing campaigns that drive real business growth.
+      </p>
+    </div>
+
+    <div>
+      <div class="case-modal-section-title">Skills &amp; Deliverables</div>
+      <div class="case-modal-skills">
+        <span class="case-modal-skill">Google Ads</span>
+        <span class="case-modal-skill">Analytics &amp; Tracking Setup</span>
+        <span class="case-modal-skill">Looker Studio</span>
+        <span class="case-modal-skill">PPC Campaign Setup &amp; Management</span>
+        <span class="case-modal-skill">Campaign Optimization</span>
+      </div>
+    </div>
+
+    <div class="case-modal-gallery">
+      <img src="./images/case4_1.png" class="case-modal-main-img"
+        alt="Plymouth business Google Ads results screenshot 1">
+      <img src="./images/case4_2.png" class="case-modal-main-img"
+        alt="Plymouth business Google Ads results screenshot 2">
+    </div>
+
+  </div>
+
+  <div id="case-glass52" class="case-modal-content-template" style="display:none;">
+
+    <div class="case-modal-text">
+
+      <p>
+        For a new glass railing business in East Gwillimbury, Ontario, we launched Google Ads in September but struggled
+        at first because competitors had strong credibility, thousands of reviews, and aggressive pricing, which led to
+        only a few initial leads. After digging into competitor activity, market behavior, and user patterns, I found
+        issues on the landing page that were hurting conversions, so I adjusted both the campaign structure and the page
+        itself to improve user flow and clarity. By the following month the results shifted fast, with the account
+        generating 463 clicks, 52 conversions, and about $2.54K in ad spend at a cost per conversion of $48.85, giving
+        the campaign its first real lift and setting the client on a stronger trajectory in a competitive market.
+      </p>
+    </div>
+
+    <div>
+      <div class="case-modal-section-title">Skills &amp; Deliverables</div>
+      <div class="case-modal-skills">
+        <span class="case-modal-skill">Lead Generation</span>
+        <span class="case-modal-skill">Landing Page Optimization</span>
+        <span class="case-modal-skill">Conversion Rate Optimization</span>
+        <span class="case-modal-skill">Microsoft Clarity</span>
+        <span class="case-modal-skill">Data Analysis</span>
+      </div>
+    </div>
+
+    <div class="case-modal-gallery">
+      <img src="./images/case5_1.png" class="case-modal-main-img"
+        alt="Glass railing company Google Ads turnaround case study">
+    </div>
+
+  </div>
+
+
+  </div>
+
+  <!-- ===========================
+     POPUP MODAL
+     =========================== -->
+
+  <!-- Case study modal -->
+  <div class="case-modal-backdrop" id="case-modal-backdrop">
+    <div class="case-modal">
+
+      <div class="case-modal-header">
+        <h3 class="case-modal-title" id="case-modal-title"></h3>
+        <button class="case-modal-close" type="button" onclick="closeCaseModal()">×</button>
+      </div>
+
+      <div class="case-modal-body" id="case-modal-body">
+        <!-- JS will insert: text, skills and image here in this order -->
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ===========================
+     CASE STUDIES SCRIPT
+     =========================== -->
+
+  <script>
+    // CASE STUDY CAROUSEL (unchanged)
+    let casePageIndex = 0;
+
+    function updateCaseDots() {
+      const dotsContainer = document.getElementById('case-dots');
+      const pages = document.querySelectorAll('.case-page');
+      if (!dotsContainer || !pages.length) return;
+
+      dotsContainer.innerHTML = '';
+
+      pages.forEach((page, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'case-dot' + (idx === casePageIndex ? ' active' : '');
+        dot.addEventListener('click', () => {
+          showCasePage(idx);
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function showCasePage(index) {
+      const track = document.querySelector('.case-track');
+      const pages = document.querySelectorAll('.case-page');
+      if (!track || !pages.length) return;
+
+      if (index < 0) index = pages.length - 1;
+      if (index >= pages.length) index = pages.length - 1;
+
+      casePageIndex = index;
+      const offset = -casePageIndex * 100;
+      track.style.transform = `translateX(${offset}%)`;
+      updateCaseDots();
+    }
+
+    function moveCasePage(direction) {
+      const pages = document.querySelectorAll('.case-page');
+      if (!pages.length) return;
+
+      let nextIndex = casePageIndex + direction;
+      if (nextIndex < 0) nextIndex = pages.length - 1;
+      if (nextIndex >= pages.length) nextIndex = 0;
+      showCasePage(nextIndex);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showCasePage(0);
+    });
+
+    // CASE STUDY MODAL
+
+    function openCaseModal(templateId) {
+      const template = document.getElementById(templateId);
+      const backdrop = document.getElementById('case-modal-backdrop');
+      const titleEl = document.getElementById('case-modal-title');
+      const bodyEl = document.getElementById('case-modal-body');
+
+      if (!template || !backdrop || !bodyEl) return;
+
+      // Set title per case
+      if (templateId === 'case-meta40x') {
+        titleEl.textContent = '40x ROAS with Meta Ads: Unlocking Untapped Brand Potential💥';
+      } else if (templateId === 'case-mexlog') {
+        titleEl.textContent = '☑️50+ Qualified Leads for a High-Value Mexican Logistics Business!';
+      } else if (templateId === 'case-78k') {
+        titleEl.textContent = 'High-Converting Google Ads Campaign | $78K Revenue from $4K Budget';
+      } else if (templateId === 'case-plymouth778') {
+        titleEl.textContent = '💥778% ROAS Achieved for Plymouth Business with Just $1.4K Ad Spend';
+      } else if (templateId === 'case-glass52') {
+        titleEl.textContent = 'From Struggling Launch to 52 Conversions: A Simple Google Ads Turnaround for a Glass Company 🚀';
+      } else {
+        titleEl.textContent = 'Case study';
+      }
+
+
+
+
+      // Clear old content
+      bodyEl.innerHTML = '';
+
+      // Copy all blocks from the template in order
+      Array.from(template.children).forEach(child => {
+        bodyEl.appendChild(child.cloneNode(true));
+      });
+
+      // Make ALL main images clickable (open in new tab)
+      const imgs = bodyEl.querySelectorAll('.case-modal-main-img');
+      imgs.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          window.open(img.src, '_blank');
+        });
+      });
+
+      backdrop.style.display = 'flex';
+    }
+
+    function closeCaseModal() {
+      const backdrop = document.getElementById('case-modal-backdrop');
+      if (backdrop) {
+        backdrop.style.display = 'none';
+      }
+    }
+
+    // Close when clicking on the dark area
+    document.addEventListener('click', (e) => {
+      const backdrop = document.getElementById('case-modal-backdrop');
+      const modal = backdrop ? backdrop.querySelector('.case-modal') : null;
+      if (!backdrop || !modal) return;
+
+      if (e.target === backdrop) {
+        closeCaseModal();
+      }
+    });
+  </script>
+
+
+
+
+  <section id="testimonials">
+    <div class="box">
+      <h1 class="section-title">Testimonials</h1>
+
+      <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:30px;
+      justify-content:center;
+    ">
+
+        <!-- Testimonial 1 -->
+        <div style="
+        margin-top: 20px;
+        background:#FFFFFF;
+        border:1px solid #E2E2E2;
+        border-radius:18px;
+        padding:20px;
+        width:100%;
+        max-width:480px;
+        box-shadow:0 14px 32px rgba(0,0,0,0.15);
+      ">
+          <video controls style="
+          width:100%;
+          border-radius:14px;
+          margin-bottom:14px;
+          box-shadow:0 8px 20px rgba(0,0,0,0.25);
+        ">
+            <source src="./images/t1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <h3 style="margin:6px 0 2px 0; color:#000;">Andrew</h3>
+          <p style="margin:2px 0; font-weight:600; color:#FF006E;">Conversion Consulting</p>
+          <p style="margin-top:6px; color:#111;">
+            “Maniul is professional, always on time, and extremely competent at his job.”
+          </p>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div style="
+        margin-top: 20px;
+        background:#FFFFFF;
+        border:1px solid #E2E2E2;
+        border-radius:18px;
+        padding:20px;
+        width:100%;
+        max-width:480px;
+        box-shadow:0 14px 32px rgba(0,0,0,0.15);
+      ">
+          <video controls style="
+          width:100%;
+          border-radius:14px;
+          margin-bottom:14px;
+          box-shadow:0 8px 20px rgba(0,0,0,0.25);
+        ">
+            <source src="./images/t2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <h3 style="margin:6px 0 2px 0; color:#000;">Diana</h3>
+          <p style="margin:2px 0; font-weight:600; color:#FF006E;">Bucks Logistics</p>
+          <p style="margin-top:6px; color:#111;">
+            “He communicates fast, explains clearly, and consistently delivers results.”
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="box">
+      <h1 class="section-title">Education</h1>
+
+      <!-- AIUB -->
+      <div style="margin:40px 0;">
+        <div style="display:flex; justify-content:center; margin-bottom:10px;">
+          <img src="./images/aiub-logo.png" alt="AIUB"
+            style="width:200px; height:auto; object-fit:contain; display:block;">
+        </div>
+        <div style="color:#000000; line-height:1.6; text-align:left;">
+          <h4 style="color:#FF006E; margin-bottom:5px;">BSc in Computer Science and Engineering</h4>
+          <p style="margin:2px 0;">
+            <strong>American International University–Bangladesh (AIUB), Dhaka</strong> —
+            <a href="https://www.aiub.edu" target="_blank" rel="noopener noreferrer"
+              style="color:#FF006E; text-decoration:none;">Visit Website</a>
+          </p>
+          <p style="margin:2px 0;">2022 – Present | CGPA: 3.74</p>
+          <p>
+            The Bachelor of Science in Computer Science and Engineering program at AIUB offers a strong foundation in
+            software development, data structures, algorithms, and emerging technologies. The curriculum emphasizes
+            hands on learning through projects, teamwork, and research, with specialized coursework in programming,
+            data science, machine learning, and natural language processing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Font Awesome (place in <head> or before this section) -->
+  <!-- Font Awesome (place in <head> or before this section) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <section id="skills">
+    <div class="box">
+      <h1 class="section-title">Skills</h1>
+
+      <div class="skills-layout">
+
+        <div class="skill-card">
+          <i class="fas fa-bolt" style="font-size:32px;color:#FF006E;"></i>
+          <h3 style="margin:10px 0 6px 0;">Hard Skills</h3>
+
+          <div class="skill-badges">
+            <span class="skill-badge">Google Ads</span>
+            <span class="skill-badge">Meta Ads</span>
+            <span class="skill-badge">YouTube and Display Campaigns</span>
+            <span class="skill-badge">PPC Optimization</span>
+            <span class="skill-badge">Conversion Rate Optimization</span>
+            <span class="skill-badge">Competitor Research</span>
+            <span class="skill-badge">Creative Strategy</span>
+            <span class="skill-badge">Google Analytics 4</span>
+            <span class="skill-badge">Google Tag Manager</span>
+            <span class="skill-badge">Looker Studio</span>
+            <span class="skill-badge">Server Side Tracking</span>
+            <span class="skill-badge">Lead Gen Strategy</span>
+            <span class="skill-badge">Ecommerce Marketing</span>
+            <span class="skill-badge">WordPress</span>
+            <span class="skill-badge">Shopify</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <i class="fas fa-brain" style="font-size:32px;color:#FF006E;"></i>
+          <h3 style="margin:10px 0 6px 0;">Soft Skills</h3>
+
+          <div class="skill-badges">
+            <span class="skill-badge">Problem Solving</span>
+            <span class="skill-badge">Communication</span>
+            <span class="skill-badge">Leadership</span>
+            <span class="skill-badge">Decision Making</span>
+            <span class="skill-badge">Time Management</span>
+            <span class="skill-badge">Integrity</span>
+            <span class="skill-badge">Adaptability</span>
+            <span class="skill-badge">Professionalism</span>
+            <span class="skill-badge">Attention to Detail</span>
+            <span class="skill-badge">Quick Learning</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section id="certificates">
+    <div class="box">
+      <h1 class="section-title">Certifications</h1>
+
+      <div class="cert-slider-container">
+        <div id="cert-slider" class="cert-slider">
+          <img src="./images/cert1.jpg" alt="Certificate 1">
+          <img src="./images/cert2.jpg" alt="Certificate 2">
+          <img src="./images/cert3.jpg" alt="Certificate 3">
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="cert-btn left" onclick="moveCertSlide(-1)">‹</button>
+        <button class="cert-btn right" onclick="moveCertSlide(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let certIndex = 0;
+
+    function moveCertSlide(direction) {
+      const slider = document.getElementById("cert-slider");
+      const total = slider.children.length;
+
+      certIndex = (certIndex + direction + total) % total;
+      slider.style.transform = `translateX(-${certIndex * 100}%)`;
+    }
+
+    // Auto-slide every 4 seconds
+    setInterval(() => moveCertSlide(1), 4000);
+  </script>
+
+
+  <br>
+  <footer id="contact">
+    <!-- About column -->
+    <div class="footer-column">
+      <h2 class="footer-title">Maniul Islam</h2>
+      <p class="footer-subtitle">
+        Performance marketing strategist and media buyer
+      </p>
+      <p class="footer-text">
+        Helping agencies and local brands turn underperforming ad campaigns
+        into predictable revenue growth with data driven full funnel advertising.
+      </p>
+
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ13y73YJhCAVoaufddVyEOsl6Ql_wU-1ayrOzjdAOQy6ikmrieo9_UHl7BkVt1wkMjtRs0FpIsB"
+        target="_blank" rel="noopener noreferrer" class="footer-cta">
+        🚀 Book a growth call
+      </a>
+    </div>
+
+    <!-- Contact & Socials -->
+    <div class="footer-column">
+      <h3 class="footer-heading">Contact</h3>
+      <ul class="footer-list">
+        <li>
+          <span class="footer-label">Email</span>
+          <a href="mailto:info.maniul@gmail.com">
+            info.maniul@gmail.com
+          </a>
+        </li>
+      </ul>
+
+      <h3 class="footer-heading" style="margin-top: 20px;">Socials</h3>
+      <div class="footer-socials">
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/maniulx/" target="_blank" class="social-icon" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/maniul.pro/" target="_blank" class="social-icon" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/maniulx/" target="_blank" class="social-icon" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+
+        <!-- Gmail -->
+        <a href="mailto:info.maniul@gmail.com" class="social-icon" aria-label="Gmail">
+          <i class="fas fa-envelope"></i>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/8801937493888" target="_blank" class="social-icon" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Location column -->
+    <div class="footer-column">
+      <h3 class="footer-heading">Location</h3>
+      <p class="footer-text">Mirpur, Dhaka, Bangladesh</p>
+
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.1110471514574!2d90.34714211542929!3d23.782991093212264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d33532b3fb%3A0x76d2bda62cde02f4!2sMazar%20Road%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1762694489132!5m2!1sen!2sbd"
+        width="100%" height="160" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy">
+      </iframe>
+
+    </div>
+  </footer>
+
+  <a href="https://wa.me/8801937493888" class="whatsapp-float" target="_blank" aria-label="Chat with me on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+</body>
+
+</html>
